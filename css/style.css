@@ -27,25 +27,27 @@ html, body {
 }
 
 .question-container .title .point {
-    
-    
-    font-size: 0.8em;
-    font-weight: thin;
-    color: #40f
+    color: #40f;
+    font-weight: normal;
+    font-size: 12px;
 }
 
+.question-container:has(.wrong) .title .point {
+    color: red
+}
 .question-container .content {
     font-size: 1.2em;
     font-style: italic;
 }
-.question-container:has(.answered) button{
+.answers-container:has(.answered) button{
     background: #ccc;
+    color: #888;
 }
-.question-container button.answered {
+.answers-container button.answered {
     border: 2px solid#40f;
     color: #40f;
 }
-.question-container button.answered.wrong {
+.answers-container button.wrong {
     border-color: red;
     color: red;
 }
