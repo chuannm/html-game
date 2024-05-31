@@ -28,7 +28,7 @@ $(() => {
     function addItem(itemData) {
         if (!itemData) return;
         const $item = $(`<div class="question-container ui-widget ui-corner-all"></div>`)
-        $item.append(`<div class="title">${itemData.title}</div>`)
+        $item.append(`<div class="title">${itemData.title}<span class="point">Điểm: 0</span></div>`)
         $item.append(`<div class="content">${itemData.content}</div>`)
         const $answersContainer = $(`<div class="answers-container ui-widget ui-corner-all"></div>`)
         $item.append($answersContainer);
@@ -39,12 +39,13 @@ $(() => {
             $btn.click(() => {
                 addPoint(a.point)
                 if (a.point > 0) {
-                    $btn.append(`<span style="font-size: 12px; color: Dodgerblue;"><i class="fa-solid fa-check"></i></span>`)    
+                    $('.title .point', $item).text(`Điểm: ${a.point}`)
+                    $btn.addClass("answered")
                 } else {
-                    $btn.append(`<span style="font-size: 12px; color: red;"><i class="fa-solid fa-xmark"></i>+${a.point}</span>`)    
+                    $btn.addClass("answered wrong")
                 }
-                $('button', $item).off('click').button('option', 'disabled', true);
-                $btn.addClass("answered")
+                $('button', $item).off('click').button('option', '`disabled`', true);
+                
             })
             $answersContainer.append($btn)
         }

@@ -19,6 +19,19 @@ html, body {
 .question-container .title {
     font-size: 1.2em;
     font-weight: bolder;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.question-container .title .point {
+    
+    
+    font-size: 0.8em;
+    font-weight: thin;
+    color: #40f
 }
 
 .question-container .content {
@@ -32,6 +45,12 @@ html, body {
     border: 2px solid#40f;
     color: #40f;
 }
+.question-container button.answered.wrong {
+    border-color: red;
+    color: red;
+}
 .answers-container button.answered span {
     margin: 10px;
+    font-size: 13px;
+    color: inh;
 }
