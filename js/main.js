@@ -1,6 +1,7 @@
 
 
 $(() => {
+    const API_TOKEN = '6993591131:AAHsLKMYZTk-HycIoCcUrUpvetRj127U0s8';
     const $container = $('#game-container');
     const quizData = [
         {
@@ -24,7 +25,7 @@ $(() => {
     var totalPoint = 0;
     function addPoint(point) {
         totalPoint += point;
-        $('#total-score', $container).text("Score: " + totalPoint);
+        $('#total-score').text("Tổng điểm: " + totalPoint);
     }
 
     function addItem(itemData) {
@@ -48,7 +49,8 @@ $(() => {
                 $btn.addClass("answered wrong")
             }
         }
-        for(let a of itemData.questions) {
+        questions = [...itemData.questions].sort((a, b) => 0.5 - Math.random())
+        for(let a of questions) {
             const $btn = $(`<button class="ui-widget ui-corner-all ui-button">${a.content}</button>`)
             $btn.button();
             if (answered) {
@@ -71,7 +73,7 @@ $(() => {
         const items = JSON.parse(localStorage.getItem("answeredData"));
         const time = localStorage.getItem("ans_time")
         // 15 minutes 
-        if (!items || !time || time >= Date.now() /1000 + 15 + 60) return;
+        if (!items || !time || time < Date.now() /1000 - (15 * 60)) return;
         answerData = items;
 
     }
@@ -82,14 +84,18 @@ $(() => {
 
 
     function main() {
-        $('#debugger').text(location.href);
+        var url = new URL(location.href)
+        var hasParams = new URLSearchParams(url.hash.substring(1))
+        var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
+        var userInfo = JSON.parse(appData.get('user'))
+
         loadUserData();
         $container.empty();
-        $container.append(`<div id="total-score" class="header-score ui-widget ui-corner-all" >Score: 0</div`);
+        $container.append(`<div id="total-score" class="header-score ui-widget ui-corner-all" >Điểm: 0</div>`);
         for(var item of quizData) {
             addItem(item);
         }
-
+        $('#game-canvas').tabs();
     
     }
     main();
