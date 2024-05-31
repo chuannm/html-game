@@ -1,5 +1,6 @@
 * {
-    font-family: 'Courier' !important
+    font-family: 'Courier' !important;
+    color: white;
 }
 html, body {
     height: 100%;
@@ -85,16 +86,16 @@ body h1:nth-child(1) {
 .answers-container button {
     flex: 1;
     min-width: calc(50% - 10px);
-}
-.answers-container:has(.answered) button{
     background: #ccc;
-    color: #888;
+}
+.answers-container button:not(.answered) {
+    color: black
 }
 .answers-container button.answered:not(.wrong) {
-    box-shadow: 0px 0px 10px white;
-    color: white;
+    box-shadow: 0px 0px 10px lightgreen;
+    color: blue;
 }
-.answers-container button.wrong {
+.answers-container button.answered.wrong {
     box-shadow: 0px 0px 10px red;
     color: red;
 }

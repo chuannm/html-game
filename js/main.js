@@ -3,24 +3,7 @@
 $(() => {
     const API_TOKEN = '6993591131:AAHsLKMYZTk-HycIoCcUrUpvetRj127U0s8';
     const $container = $('#game-container');
-    const quizData = [
-        {
-            id:1, title:'Quest 1 title', content: "Câu hỏi 1", questions:[
-                {id: 1, point: 0, content: "Answer1"}, 
-                {id: 2, point: 0, content: "Answer2"}, 
-                {id: 3, point: 0, content: "Answer3"}, 
-                {id: 4, point: 5, content: "Answer4"}, 
-            ]
-        },
-        {
-            id: 2, title:'Quest 2 title', content: "Câu hỏi 2", questions:[
-                {id: 1, point: 0, content: "Answer1"}, 
-                {id: 2, point: 5, content: "Answer2"}, 
-                {id: 3, point: 0, content: "Answer3"}, 
-                {id: 4, point: 0, content: "Answer4"}, 
-            ]
-        }
-    ]
+    var quizData = [];
     var answerData = {};
     var totalPoint = 0;
     function addPoint(point) {
@@ -70,6 +53,10 @@ $(() => {
 
 
     function loadUserData() {
+        $.ajax('questions.json', {
+            async: false,
+            success: json => quizData = json
+        });
         const items = JSON.parse(localStorage.getItem("answeredData"));
         const time = localStorage.getItem("ans_time")
         // 15 minutes 
@@ -83,13 +70,13 @@ $(() => {
     }
 
 
-    function main() {
+    async function main() {
         var url = new URL(location.href)
         var hasParams = new URLSearchParams(url.hash.substring(1))
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
         var userInfo = JSON.parse(appData.get('user'))
 
-        loadUserData();
+        await loadUserData();
         $container.empty();
         $container.append(`<div id="total-score" class="header-score ui-widget ui-corner-all" >Điểm: 0</div>`);
         for(var item of quizData) {
