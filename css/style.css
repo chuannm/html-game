@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+.question-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.question-container:has(.answered) button{
+    background: #ccc;
+}
+.question-container:has(.answered) button.answered {
+    border: 2px solid#40f;
+    color: #40f;
+}
+.answers-container button span {
+    margin: 10px;
+}
