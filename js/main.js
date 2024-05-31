@@ -82,6 +82,7 @@ $(() => {
 
 
     function main() {
+        $('#debugger').text(location.href);
         loadUserData();
         $container.empty();
         $container.append(`<div id="total-score" class="header-score ui-widget ui-corner-all" >Score: 0</div`);
@@ -89,8 +90,7 @@ $(() => {
             addItem(item);
         }
 
-        
-        
+    
     }
     main();
 });
