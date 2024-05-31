@@ -14,14 +14,24 @@ html, body {
     flex-direction: column;
     border: 1px solid #ccc;
     padding: 10px;
+    gap: 10px;
+}
+.question-container .title {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.question-container .content {
+    font-size: 1.2em;
+    font-style: italic;
 }
 .question-container:has(.answered) button{
     background: #ccc;
 }
-.question-container:has(.answered) button.answered {
+.question-container button.answered {
     border: 2px solid#40f;
     color: #40f;
 }
-.answers-container button span {
+.answers-container button.answered span {
     margin: 10px;
 }
