@@ -53,7 +53,7 @@ $(() => {
 
 
     function loadUserData() {
-        $.ajax('questions.json', {
+        $.ajax('quiz-data.json', {
             async: false,
             success: json => quizData = json
         });
@@ -76,13 +76,15 @@ $(() => {
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
         var userInfo = JSON.parse(appData.get('user'))
 
-        await loadUserData();
+        loadUserData();
         $container.empty();
+        const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
+        $container.append(`<div id="user-info" class="ui-widget ui-corner-all" >Người chơi: ${fullName} (${userInfo.username})</div>`);
         $container.append(`<div id="total-score" class="header-score ui-widget ui-corner-all" >Điểm: 0</div>`);
         for(var item of quizData) {
             addItem(item);
         }
-        $('#game-canvas').tabs();
+        $('#game-canvas').tabs({ hide: { effect: "zoomOut", duration: 300 },show: { effect: "fadeIn", duration: 500 } });
     
     }
     main();
