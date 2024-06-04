@@ -3,7 +3,7 @@
     color: white;
 }
 html, body {
-    height: 100%;
+    height: calc(100% - 10px);
     width: auto;
     max-width: calc(height / 2);
     
@@ -36,6 +36,10 @@ h1:nth-child(2) {
     background-image: linear-gradient(to right, red , orange);
     background-clip: text;
 }
+::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+}
 #game-canvas {
     flex: 1;
     display: flex;
@@ -43,8 +47,7 @@ h1:nth-child(2) {
     background: none;
     color: inherit;
     padding: 0px;
-    margin-bottom: 50px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 game-canvas >div {
     max-height: 100%;
@@ -75,7 +78,12 @@ game-canvas >div {
     font-weight: bold;
     text-align: center;
 }
-
+#game-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: inherit;
+}
 .question-container {
     display: flex;
     flex-direction: column;
