@@ -1,0 +1,6 @@
+Flask==3.0.0
+replicate
+psycopg2-binary
+requests
+python-dateutil
+flask-bcrypt

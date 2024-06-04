@@ -1,0 +1,10 @@
+{
+  "engines": {
+    "node": "18.x"
+  },
+  "version": "3.8.3",
+  "creator": {
+    "version": "3.8.3"
+  },
+  "uuid": "03475500-7bb9-4378-b6d7-bf93ca224c13"
+}

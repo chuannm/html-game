@@ -8,40 +8,68 @@ html, body {
     max-width: calc(height / 2);
     
 }
+
+.blink_me {
+    animation: blinker .6s linear infinite;
+  }
+  @keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+  }
+  
 body {
-    background-color: darkslategray;
+    background-image: linear-gradient(to right, darkslategray , darkslateblue);
     color: white;
     display: flex;
     flex-direction: column;
-    font-family: 'Courier'
 }
-body h1:nth-child(1) {
-    -webkit-text-stroke: 1.5px white;
-    color: #00000000;
+h1 {
+    font-size: 20px;
+    line-height: 18px;
+}
+h1:nth-child(2) {
+    text-align: center;
+    color: transparent;
     font-size: 40px; 
+    line-height: 40px;
+    background-image: linear-gradient(to right, red , orange);
+    background-clip: text;
 }
-
-
 #game-canvas {
     flex: 1;
     display: flex;
     flex-direction: column;
     background: none;
     color: inherit;
-    padding: 10px
+    padding: 10px;
+    margin-bottom: 50px;
+    overflow: scroll;
+}
+game-canvas >div {
+    max-height: 100%;
+    flex: 1;
 }
 #game-canvas .ui-tabs-panel {
     flex: 1;
     color: inherit;
+    height: 50px;
 }
-
+#game-canvas .ui-tabs-nav {
+    position: fixed;
+    bottom: 0px;
+    left: 20px;
+    right: 20px;
+    display: flex; 
+    justify-content: center;
+}
 #game-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     color: inherit;
 }
-#game-container #total-score {
+#game-container .header-score {
     font-size: 1.1em;
     font-weight: bold;
     text-align: right;
@@ -92,10 +120,11 @@ body h1:nth-child(1) {
     padding: 10px;
     flex: 1;
 }
-.answers-container button {
+.answers-container button, .answers-container button.ui-widget {
     flex: 1;
     min-width: calc(50% - 10px);
     background: #ccc;
+    font-size: 13px;
 }
 .answers-container button:not(.answered) {
     color: black
@@ -112,4 +141,35 @@ body h1:nth-child(1) {
     margin: 10px;
     font-size: 13px;
     color: inh;
+}
+
+.rank_item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;    
+}
+
+.rank_item span:nth-child(3) {
+    text-align: right;
+    flex: 1;
+}
+.rank_item span:nth-child(4) {
+    min-width: 51%;
+    text-align: right;
+    flex: 1;
+    color: gray;
+}
+
+.rank_item:nth-child(1) * {
+    color: gold;
+    /* text-shadow: 0 0 5px gold; */
+}
+
+.rank_item:nth-child(2) * {
+    color: white;
+    /* text-shadow: 0 0 5px gold; */
+}
+.rank_item:nth-child(3) * {
+    color: #CD7F32;
 }
