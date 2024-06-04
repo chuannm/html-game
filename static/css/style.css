@@ -42,7 +42,7 @@ h1:nth-child(2) {
     flex-direction: column;
     background: none;
     color: inherit;
-    padding: 10px;
+    padding: 0px;
     margin-bottom: 50px;
     overflow: scroll;
 }
@@ -53,13 +53,9 @@ game-canvas >div {
 #game-canvas .ui-tabs-panel {
     flex: 1;
     color: inherit;
-    height: 50px;
+    height: 30px;
 }
 #game-canvas .ui-tabs-nav {
-    position: fixed;
-    bottom: 0px;
-    left: 20px;
-    right: 20px;
     display: flex; 
     justify-content: center;
 }
