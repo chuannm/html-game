@@ -1,5 +1,5 @@
 * {
-    font-family: 'Courier' !important;
+    font-family: "Courier Prime", monospace !important;
     color: white;
 }
 html, body {
@@ -68,21 +68,22 @@ game-canvas >div {
     gap: 10px;
     color: inherit;
 }
-#game-container .header-score {
+#user-info {
+    color: yellow;
+}
+.header-score {
     font-size: 1.1em;
     font-weight: bold;
     text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
 }
 #game-container #user-info {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-}
-#game-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    color: inherit;
 }
 .question-container {
     display: flex;
@@ -127,11 +128,14 @@ game-canvas >div {
 .answers-container button, .answers-container button.ui-widget {
     flex: 1;
     min-width: calc(50% - 10px);
-    background: #ccc;
+    background: white;
     font-size: 13px;
+    color: black;
 }
-.answers-container button:not(.answered) {
-    color: black
+.answers-container:has(.answered) button:not(.answered) {
+    color: gray;
+    background: #ccc;
+
 }
 .answers-container button.answered:not(.wrong) {
     box-shadow: 0px 0px 10px lightgreen;
@@ -153,27 +157,56 @@ game-canvas >div {
     flex-wrap: wrap;
     gap: 10px;    
 }
-
-.rank_item span:nth-child(3) {
-    text-align: right;
+.rank_item:nth-child(1) * {
+    color: orange !important;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.rank_item span:nth-child(2) {
     flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+.rank_item span:nth-child(3) {
+    width: 20%;
+    text-align: right;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 .rank_item span:nth-child(4) {
-    min-width: 51%;
     text-align: right;
-    flex: 1;
     color: gray;
+    max-width: calc(50% - 15px - 30px);
 }
 
-.rank_item:nth-child(1) * {
-    color: gold;
-    /* text-shadow: 0 0 5px gold; */
+.rank_item:nth-child(2) span:nth-child(1) {
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/009/342/544/small/winner-medal-clipart-design-illustration-free-png.png');
+}
+.rank_item:nth-child(3) span:nth-child(1) {
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/009/305/628/small/winner-medal-clipart-design-illustration-free-png.png');
+}
+.rank_item:nth-child(4) span:nth-child(1) {
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/009/391/440/small/winner-medal-clipart-design-illustration-free-png.png');
+}
+.rank_item:nth-child(2) span:nth-child(1), .rank_item:nth-child(3) span:nth-child(1), .rank_item:nth-child(4) span:nth-child(1){
+    background-position: 50% 50%;
+    background-size:contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: auto;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.rank_item:nth-child(2) * {
-    color: white;
-    /* text-shadow: 0 0 5px gold; */
+.nav-questions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
-.rank_item:nth-child(3) * {
-    color: #CD7F32;
+.nav-questions button {
+    max-width: calc(50% - 10px);
 }

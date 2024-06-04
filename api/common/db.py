@@ -21,7 +21,7 @@ def executeSQL(sql: str, params: any):
 
 def closeDB(commit=True):
     global __connection__
-    if __connection__ != None:
+    if __connection__ != None and __connection__.closed == 0:
         if commit:
             __connection__.commit()
         __connection__.close()

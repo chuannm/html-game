@@ -32,7 +32,6 @@ def user_data(user_id):
         """
         try:
             cursor = executeSQL(sql, [user_id, name, json.dumps(answered_data), high_score])
-            closeDB()
         except Exception as e: 
             print (e)
             return { "code": "500", "data": "DATA ERROR"} 
@@ -45,6 +44,8 @@ def user_data(user_id):
     except Exception as e:
         print (e)
         return { "code": "400", "data": "BAD_REQUEST"}
+    finally:
+        closeDB(True)
 @app.route('/api/ranks')
 def getRanks() :
         sql = "SELECT id, name, extract(epoch from update_time) * 1000, high_score FROM user_data ORDER BY high_score DESC, update_time DESC LIMIT 100"

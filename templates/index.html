@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9" />
   <title>Vercel HTML Starter</title>
   <meta name="description" content="High-performance HTML based website template." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/themes/base/jquery-ui.min.css"
     integrity="sha512-8PjjnSP8Bw/WNPxF6wkklW6qlQJdWJc/3w/ZQPvZ/1bjVDkrrSqLe9mfPYrMxtnzsXFPc434+u4FHLnLjXTSsg=="
@@ -30,8 +34,9 @@
       <li><a href="#game-rules">Luật</a></li>
     </ul>
     <div id="game-container">
+      <div id="game-header"></div>
     </div>
-    <div id="game-rules">
+    <div id="game-rules" style="display: none">
       <h2>Giới thiệu</h2>
       <p>Đây là trò chơi nội bộ của Archer Game Studio nhân dịp du lịch Hè 2024. Game không dành cho người dùng không phải là thành viên của công ty.</p>
       <h2>Luật chơi</h2>
@@ -56,9 +61,7 @@
       </div>
       <div>Lưu ý: giải thưởng chỉ được ghi nhận khi có nhiều hơn 20 người chơi</div>
     </div>
-    <div id="game-ranks"> 
-      <h2>Xếp hạng</h2> 
-      <div id="ranks-content"></div>
+    <div id="game-ranks" style="display: none"> 
     </div>
    
   </div>
