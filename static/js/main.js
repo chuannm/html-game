@@ -66,6 +66,7 @@ $(() => {
                 $btn.click(() => {
                     setAnswer(itemData, a, $btn, true)
                     $('button', $item).off('click').button('option', '`disabled`', true);
+                    setTimeout(() => showQuestion(questionIndex + 1), 1000);
                 })
             }
             $answersContainer.append($btn)

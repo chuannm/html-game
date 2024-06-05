@@ -3,10 +3,9 @@
     color: white;
 }
 html, body {
-    height: calc(100% - 10px);
+    height: 100%;
     width: auto;
-    max-width: calc(height / 2);
-    
+    padding: 10px;
 }
 
 .blink_me {
@@ -20,19 +19,25 @@ html, body {
   
 body {
     background-image: linear-gradient(to right, darkslategray , darkslateblue);
-    color: white;
     display: flex;
     flex-direction: column;
+    margin: 10px auto;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: -3px 3px 10px orange;
+    height: calc(100% - 50px);
+    width: calc(100% - 50px);
+    max-width: 600px;
 }
 h1 {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 18px;
 }
-h1:nth-child(2) {
+h1:nth-child(1) {
     text-align: center;
     color: transparent;
-    font-size: 40px; 
-    line-height: 40px;
+    font-size: 25px; 
+    line-height: 25px;
     background-image: linear-gradient(to right, red , orange);
     background-clip: text;
 }
@@ -48,6 +53,7 @@ h1:nth-child(2) {
     color: inherit;
     padding: 0px;
     overflow-y: scroll;
+    border-radius: 10px;
 }
 game-canvas >div {
     max-height: 100%;
@@ -61,6 +67,7 @@ game-canvas >div {
 #game-canvas .ui-tabs-nav {
     display: flex; 
     justify-content: center;
+    height: 30px;
 }
 #game-container {
     display: flex;
