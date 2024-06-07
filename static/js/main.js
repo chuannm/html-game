@@ -143,6 +143,11 @@ $(() => {
         })
     }
 
+    function canPlay() {
+        if (!answerData || !quizData) return true;
+        return Object.keys(answerData).length < quizData.length;
+    }
+
     function get_server_now() {
         return Date.now() / 1000 + adjusted_sv_timer;
     }
@@ -167,7 +172,6 @@ $(() => {
         $row.append(`<span class="bxh_rank">${rank}</span>`);
         $row.append(`<span class="bxh_name">${name}</span>`);
         $row.append(`<span class="bxh_score">${score}</span>`);
-        // $row.append(`<span class="bxh_timed"">${time}</span>`)
         return $row;
     }
     function showRankingTable() {
@@ -196,22 +200,26 @@ $(() => {
         if (index < 0 || index >= quizData.length) return;
         const item = quizData[index];
         if (!item) return;
+        $('.question-container', $container).hide();
+        if (!canPlay()) {
+            navText = "Đã hoàn thành! Hãy chờ cooldown để chơi lại."
+            $('#txtNav').text("Đã hoàn thành! Hãy chờ cooldown để chơi lại.");
+            return;
+        }
+
+        $('#txtNav').text((questionIndex + 1)  + "/" + quizData.length)
+
         $question = $(`#question-${item.id}`);
         if ($question.length == 0) {
             return;
         }
         questionIndex = index;
-        let navText = (questionIndex + 1)  + "/" + quizData.length;
-        if (Object.keys(answerData).length >= quizData.length) {
-            questionIndex = quizData.length - 1;
-            navText = "Đã hoàn thành! Hãy chờ cooldown để chơi lại."
-        }
-        $('.question-container', $container).hide();
+        
+        
         $question.show()
         $('.nav-questions #btnPrev').button('option', 'disabled', questionIndex < 1);
         $('.nav-questions #btnNext').button('option', 'disabled', questionIndex >= quizData.length - 1);
         
-        $('#txtNav').text(navText);
     }
     function main() {
         $('#game-canvas').tabs({ hide: { effect: "zoomOut", duration: 300 },show: { effect: "fadeIn", duration: 500 }, beforeActivate: onTabChanged });
@@ -234,9 +242,11 @@ $(() => {
             <div id="high-score">Điểm cao: ${highscore}</div>\
             <div id="total-score" >Điểm: 0</div>
         </div>`);
-        for(let i = 0, n = quizData.length; i < n; i++) {
-            item = quizData[i];
-            addItem(item, $container);
+        if (canPlay()) {
+            for(let i = 0, n = quizData.length; i < n; i++) {
+                item = quizData[i];
+                addItem(item, $container);
+            }
         }
         display_retry_time();
         
