@@ -15,6 +15,7 @@ def home():
 def readQuizJson():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json")
     with open(path, "r") as json_file: return json.loads(json_file.read())
+
 @app.route('/api/user_data/<user_id>', methods = ["GET", "POST"])
 def user_data(user_id):
     if not user_id: return { "code": "400", "data": "BAD_REQUEST"}

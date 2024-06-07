@@ -3,6 +3,7 @@
 $(() => {
     const API_TOKEN = '6993591131:AAHsLKMYZTk-HycIoCcUrUpvetRj127U0s8';
     const $container = $('#game-container');
+    const COOL_DOWN_TIME = 120;
     var quizData = [];
     var answerData = {};
     var totalPoint = 0;
@@ -33,6 +34,15 @@ $(() => {
         
     }
 
+    function showMessage(title, content) {
+        if ($('#dialog-alert').length == 0) {
+            $('body').append('<div id="dialog-alert"></dialog>')
+            $('#dialog-alert').dialog({autoOpen: false})    
+        }
+        $('#dialog-alert').html(content);
+        $('#dialog-alert').dialog('option','title', title);
+        $('#dialog-alert').dialog('open');
+    }
     function addItem(itemData, $gameContainer) {
         if (!itemData) return;
         const $item = $(`<div class="question-container ui-widget ui-corner-all" id="question-${itemData.id}"></div>`)
@@ -83,7 +93,6 @@ $(() => {
             success: json => quizData = json
         });
         var saved = JSON.parse(localStorage.getItem("answeredData")) || {};
-        var time = localStorage.getItem("ans_time")
         $.ajax(`/api/user_data/${encodeURIComponent(userInfo.username)}`, {
             method: 'GET',
             async: false,
@@ -95,7 +104,6 @@ $(() => {
                     save_time = resp.data.time;
                     adjusted_sv_timer = resp.data.now - Date.now() / 1000
                 }
-                
             }
         })
         
@@ -139,15 +147,18 @@ $(() => {
         return Date.now() / 1000 + adjusted_sv_timer;
     }
     function get_remaining_time() {
-        return 15 * 60 + Math.floor((save_time - get_server_now())) 
+        return COOL_DOWN_TIME * 60 + Math.floor((save_time - get_server_now())) 
     }
     function display_retry_time() {
         var remaining = get_remaining_time()
         if (remaining < 0) $('#count_down').text("")
         else {
-            var minutes = String(Math.floor(remaining / 60)).padStart(2, 0);
-            var seconds = String(remaining % 60).padStart(2, 0);
-            $('#count_down').text(`Lượt tiếp theo: ${minutes}:${seconds}`)
+            var minutes = Math.floor(remaining / 60);
+            var hours = Math.floor(minutes / 60);
+            minutes = minutes - hours * 60;
+            var seconds = remaining % 60;
+            var displayTime = [hours, minutes, seconds].map(n => String(n).padStart(2, 0)).join(":")
+            $('#count_down').text(`Lượt tiếp theo: ${displayTime}`)
         }
         setTimeout(display_retry_time, 1000)
     }
@@ -190,11 +201,17 @@ $(() => {
             return;
         }
         questionIndex = index;
+        let navText = (questionIndex + 1)  + "/" + quizData.length;
+        if (Object.keys(answerData).length >= quizData.length) {
+            questionIndex = quizData.length - 1;
+            navText = "Đã hoàn thành! Hãy chờ cooldown để chơi lại."
+        }
         $('.question-container', $container).hide();
         $question.show()
         $('.nav-questions #btnPrev').button('option', 'disabled', questionIndex < 1);
         $('.nav-questions #btnNext').button('option', 'disabled', questionIndex >= quizData.length - 1);
-        $('#txtNav').text((questionIndex + 1)  + "/" + quizData.length);
+        
+        $('#txtNav').text(navText);
     }
     function main() {
         $('#game-canvas').tabs({ hide: { effect: "zoomOut", duration: 300 },show: { effect: "fadeIn", duration: 500 }, beforeActivate: onTabChanged });
@@ -209,6 +226,7 @@ $(() => {
         }
         
         loadUserData();
+
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
         $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
         $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Đếm ngược lần chơi tiếp theo</div>`);
@@ -223,9 +241,9 @@ $(() => {
         display_retry_time();
         
         $nav = $('<div class="nav-questions"></div>')
-        $nav.append($('<button class="ui-button" id="btnPrev">Câu trước</button>').click(() => showQuestion(questionIndex-1)))
+        // $nav.append($('<button class="ui-button" id="btnPrev">Câu trước</button>').click(() => showQuestion(questionIndex-1)))
         $nav.append($('<span class="ui-nav-text" id="txtNav"></span>'))
-        $nav.append($('<button class="ui-button" id="btnNext">Câu sau</button>').click(() => showQuestion(questionIndex+1)))
+        // $nav.append($('<button class="ui-button" id="btnNext">Câu sau</button>').click(() => showQuestion(questionIndex+1)))
         $container.append($nav)
         $('button', $nav).button();
         showQuestion(questionIndex);
