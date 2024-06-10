@@ -1,67 +1,62 @@
 [
   {
     "id": 1,
-    "title": "Quest 1 title",
-    "content": "Câu hỏi 1",
+    "title": "Nhân sự",
+    "content": "Công ty có bao nhiêu nhân sự tính đến thời điểm hiện tại",
     "answers": [
       {
         "id": 1,
         "point": 0,
-        "content": "Answer1"
+        "content": "44"
       },
       {
         "id": 2,
         "point": 0,
-        "content": "Answer2"
+        "content": "55"
       },
       {
         "id": 3,
         "point": 0,
-        "content": "Answer3"
+        "content": "66"
       },
       {
         "id": 4,
-        "point": 5,
-        "content": "Answer4"
-      },
-      {
-        "id": 5,
-        "point": 10,
-        "content": "Answer5"
+        "point": 1,
+        "content": "36"
       }
     ]
   },
   {
     "id": 2,
-    "title": "Quest 2 title",
-    "content": "Câu hỏi 2",
+    "title": "Nhân sự",
+    "content": "Công ty có bao nhiêu nhân sự nam",
     "answers": [
       {
         "id": 1,
         "point": 0,
-        "content": "Answer1"
+        "content": "22"
       },
       {
         "id": 2,
-        "point": 5,
-        "content": "Answer2"
+        "point": 0,
+        "content": "33"
       },
       {
         "id": 3,
         "point": 0,
-        "content": "Answer3"
+        "content": "44"
       },
       {
         "id": 4,
-        "point": 0,
-        "content": "Answer4"
+        "point": 1,
+        "content": "36"
       }
     ]
   },
   {
     "id": 3,
-    "title": "Quest 3 title",
-    "content": "Câu hỏi 3",
+    "title": "Nhân sự",
+    "content": "Công ty có bao nhiêu nhân sự nữ",
     "answers": [
       {
         "id": 1,
@@ -70,7 +65,7 @@
       },
       {
         "id": 2,
-        "point": 5,
+        "point": 0,
         "content": "Answer2"
       },
       {
@@ -80,14 +75,231 @@
       },
       {
         "id": 4,
-        "point": 0,
+        "point": 1,
         "content": "Answer4"
       }
     ]
-  }, {
+  },
+  {
     "id": 4,
-    "title": "Quest 4title",
-    "content": "Câu hỏi 4",
+    "title": "Nhân sự",
+    "content": "Hiện tại công ty đang phát triển bao nhiêu dự án game",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "4"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "3"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Nhân sự",
+    "content": "Thành viên ít tuổi nhất của công ty sinh năm bao nhiêu?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "2000"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2001"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "2002"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "2003"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Nhân sự",
+    "content": "Thành viên nhiều tuổi nhất công ty (không kể BGD) sinh năm bao nhiêu",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1982"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "1984"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "1985"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "1986"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Nhân sự",
+    "content": "Team nào có ít thành viên nữ nhất",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Team Art"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "Team GD"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "Team Marketing"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "Team Dev"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Lịch sử",
+    "content": "Công ty thành lập vào thời gian nào",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "T6/2023"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "T7/2023"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "T6/2022"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "T7/2022"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Nhân sự",
+    "content": "BGĐ có tất cả mấy anh nhỉ?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "4"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "3"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Nhân sự",
+    "content": "Công ty thành lập với bao nhiêu nhân sự? (không kể BGĐ)",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "3"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "4"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Nhân sự",
+    "content": "Công ty đã chuyển trụ sở bao nhiêu lần?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "0"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "3"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "1"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Văn hóa",
+    "content": "Văn hóa của công ty là gì?",
     "answers": [
       {
         "id": 1,
@@ -96,7 +308,7 @@
       },
       {
         "id": 2,
-        "point": 5,
+        "point": 0,
         "content": "Answer2"
       },
       {
@@ -106,8 +318,584 @@
       },
       {
         "id": 4,
+        "point": 1,
+        "content": "Kỷ luật và học tập"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Nội quy",
+    "content": "1 năm công ty có mấy lần checkpoint đánh giá kết quả nhân viên?",
+    "answers": [
+      {
+        "id": 1,
         "point": 0,
-        "content": "Answer4"
+        "content": "Không lần nào"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "1 lần "
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "3 lần "
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "2 lần"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Nhân sự",
+    "content": "Team nào có ít thành viên nhất?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Team art"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "Team dev"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "Team gd"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "Team marketing"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Nhân sự",
+    "content": "Team nào có đông thành viên nhất?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Team dev"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "Team marketing"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "Team GD"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "Team art"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Lịch sử",
+    "content": "Công ty thành lập đầu tiên với các nhân sự thuộc team nào?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Team art"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Team GD"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "Team marketing"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "Team dev"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Nhân sự",
+    "content": "Thành viên trẻ nhất trong BGĐ sinh năm bao nhiêu",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1990"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "1988"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "1985"
+      },
+      {
+        "id": 4,
+        "point": 0,
+        "content": "1986"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Lịch sử",
+    "content": "Hiện tại team GD có bao nhiêu thành viên?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "1"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "3"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "4"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Lịch sử",
+    "content": "Hiện tại team marketing có bao nhiêu thành viên",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "4"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "3"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "2"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "1"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Lịch sử",
+    "content": "Hiện tại team dev  có bao nhiêu thành viên",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "7"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "8"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "9"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "10"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Nhân sự",
+    "content": "Hiện tại team art có bao nhiêu thành viên",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "20"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "21"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "22"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "23"
+      }
+    ]
+  },
+
+
+
+
+
+
+
+
+
+  {
+    "id": 101,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho nhân viên vào ngày Tết dương lịch không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho nhân viên vào ngày 30/4 & 1/5 không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho nhân viên vào ngày Quốc khánh không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho nhân viên vào ngày sinh nhật của nhân viên không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+   {
+    "id": 105,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho con nhân viên vào ngày 1/6 và Tết trung thu không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho  nhân viên vào ngày 8/3 & 20/10 không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho  nhân viên nằm viện không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "title": "Phúc lợi",
+    "content": "Công ty có tổ chức khám sức khỏe hàng năm cho nhân viên không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Không"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Có"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "title": "Phúc lợi",
+    "content": "Công ty có phúc lợi cho người thân nhân viên nằm viện không?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Có"
+      },
+      {
+        "id": 2,
+        "point": 1,
+        "content": "Không"
+      }
+    ]
+  },
+
+
+
+
+
+
+
+
+
+  {
+    "id": 51,
+    "title": "IQ",
+    "content": "Một giải bóng chày có 1000 đội tham gia. Ở mỗi vòng đấu, các đối thủ sẽ bốc thăm để chọn ra đối thủ, đội thua sẽ bị loại. Nếu có vòng đấu mà số đội là lẻ thì sẽ có 1 đội có lá thăm được vào thẳng vòng sau. Đội cuối cùng ở lại là đội vô địch. Hỏi  cần trải qua bao nhiêu trận đấu để tìm được đội vô địch?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "499"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "1000"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "500"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "999"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "title": "IQ",
+    "content": "Biết ngày 1/1/2019 là thứ ba, hỏi ngày 1/1/2079 là thứ mấy?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "Thứ 2"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "Thứ 3"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "hứ 5"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "Chủ nhật"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "title": "IQ",
+    "content": "Cửa hàng có hai loại giỏ hoa quả: loại 1 mỗi giỏ có 4 quả táo, 8 quả lê; loại 2 mỗi giỏ có 7 quả táo, 14 quả lê. Cửa hàng có 25 quả táo, vậy cửa hàng có mấy quả lê?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "30"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "20"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "40"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "50"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "title": "IQ",
+    "content": "Đồng hồ lớn ở England, khi báo giờ tiếng chuông ngân rất dài, phải đếm tiếng chuông khá lâu. Giả dụ khoảng cách giữa 2 tiếng chuông 5s. Vậy thời gian cần đếm để biết 12h là bao lâu?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "60"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "59"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "65"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "55"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "title": "IQ",
+    "content": "5 con mèo trong 5p bắt được 5 con chuột. Theo tỷ lệ này muốn bắt 100 con chuột trong 100 phút cần bao nhiêu con mèo?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "101"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "99"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "100"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "5"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "title": "IQ",
+    "content": "Đồng hồ lớn ở England, khi báo giờ tiếng chuông ngân rất dài, phải đếm tiếng chuông khá lâu. Giả dụ khoảng cách giữa 2 tiếng chuông 5s. Vậy thời gian cần đếm để biết 6h là bao lâu?",
+    "answers": [
+      {
+        "id": 1,
+        "point": 0,
+        "content": "35"
+      },
+      {
+        "id": 2,
+        "point": 0,
+        "content": "25"
+      },
+      {
+        "id": 3,
+        "point": 0,
+        "content": "31"
+      },
+      {
+        "id": 4,
+        "point": 1,
+        "content": "30"
       }
     ]
   }
