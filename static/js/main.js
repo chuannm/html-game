@@ -141,7 +141,9 @@ $(() => {
         localStorage.setItem("answered_data", JSON.stringify(answerData));
         localStorage.setItem("ans_time", Date.now());
         console.log("point: " + point);
-        const data = {answered_data: answerData, name: [userInfo.first_name, userInfo.last_name].join(' '), lastPoint: point}
+        randomQuest();
+
+        const data = {answered_data: answerData, name: [userInfo.first_name, userInfo.last_name].join(' '), lastPoint: point, last_question_index: questionIndex}
         $.ajax(`/api/user_data/${encodeURIComponent(userInfo.username)}`, {
             method: 'POST',
             data: JSON.stringify(data),
@@ -149,11 +151,11 @@ $(() => {
                 highscore = resp.data.high_score || highscore;
                 save_time = resp.data.time;
                 last_answer_is_correct = resp.data.last_answer_is_correct;
+                last_question_index = questionIndex;
                 adjusted_sv_timer = resp.data.now - Date.now() / 1000
                 console.log("SaveTime:", save_time);
                 console.log("adjusted_sv_timer:", adjusted_sv_timer);
                 //setTimeout(() => showQuestion(questionIndex + 1), 1000);
-                randomQuest();
                 showQuestion(questionIndex);
             }
         })

@@ -26,29 +26,33 @@ def user_data(user_id):
     if not user_id: return {"code": "400", "data": "BAD_REQUEST"}
     if request.method == 'POST':
         data = request.get_json(True)
+        print(data)
+
         answered_data = data["answered_data"]
         last_point = data["lastPoint"]
         name = data["name"]
         high_score = get_total_score(answered_data)
+        last_question_index = data["last_question_index"]
         last_answer_is_correct = 1 if last_point > 0 else 0
         print("last_answer_is_correct: ", last_answer_is_correct)
-        sql = """INSERT INTO user_data (id, name, json_data, high_score, last_answer_is_correct) 
-        VALUES (%s, %s, %s, %s,%s ) 
+        sql = """INSERT INTO user_data (id, name, json_data, high_score, last_answer_is_correct, last_question_index)
+        VALUES (%s, %s, %s, %s, %s ,%s) 
             ON CONFLICT (id) DO UPDATE 
             SET 
                 json_data = EXCLUDED.json_data, 
                 high_score = GREATEST(EXCLUDED.high_score, (SELECT high_score FROM user_data WHERE id = EXCLUDED.id)), 
                 last_answer_is_correct = EXCLUDED.last_answer_is_correct,
+                last_question_index = EXCLUDED.last_question_index,
                 update_time = NOW()
         """
         try:
-            cursor = executeSQL(sql, [user_id, name, json.dumps(answered_data), high_score, last_answer_is_correct])
+            cursor = executeSQL(sql, [user_id, name, json.dumps(answered_data), high_score, last_answer_is_correct, last_question_index])
         except Exception as e:
             print(e)
             return {"code": "500", "data": "DATA ERROR"}
 
     sql = "SELECT json_data::json, extract(epoch from update_time), high_score, last_answer_is_correct," \
-          " extract(epoch from NOW()) FROM user_data WHERE id = %s"
+          " last_question_index, extract(epoch from NOW()) FROM user_data WHERE id = %s"
     try:
         cursor = executeSQL(sql, [user_id, ])
         row = cursor.fetchone()
