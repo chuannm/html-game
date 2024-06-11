@@ -5,3 +5,5 @@ json_data JSON,
 high_score integer DEFAULT 0,
 last_answer_is_correct integer DEFAULT 0,
 update_time TIMESTAMP DEFAULT NOW());
+
+ALTER TABLE "user_data" ADD IF NOT EXISTS last_answer_is_correct integer DEFAULT 0; 
