@@ -3,7 +3,7 @@
 $(() => {
     const API_TOKEN = '6993591131:AAHsLKMYZTk-HycIoCcUrUpvetRj127U0s8';
     const $container = $('#game-container');
-    const COOL_DOWN_TIME = 1;
+    const COOL_DOWN_TIME = 0.01;
     var quizData = [];
     var answerData = {};
     var totalPoint = 0;
@@ -12,7 +12,7 @@ $(() => {
     var last_answer_is_correct = 1;
     var adjusted_sv_timer = 0;
     var userInfo = null;
-    var questionIndex = 0;
+    var questionIndex = -1;
     var needShuffleQuestion = true;
 
     function addPoint(point, asNew = false) {
@@ -106,6 +106,7 @@ $(() => {
                     highscore = resp.data.high_score;
                         last_answer_is_correct = resp.data.last_answer_is_correct;
                     save_time = resp.data.time;
+                    questionIndex = resp.data.last_question_index;
                     adjusted_sv_timer = resp.data.now - Date.now() / 1000
                 }
             }
@@ -119,21 +120,21 @@ $(() => {
 
 
         if (get_remaining_time() < 0) {
-            quizData.sort((a, b) => {
-                const ia = ids.indexOf(a.id + ''), ib = ids.indexOf(b.id + '')
-                console.log('sort: {}, {}', ia, ib);
-                if (ia >= 0) {
-                    return ib < 0 ? -1 : (ia - ib);
-                }
-                if (ib >= 0) return 1;
-                return 0.5 - Math.random();
-            });
+            // quizData.sort((a, b) => {
+            //     const ia = ids.indexOf(a.id + ''), ib = ids.indexOf(b.id + '')
+            //     console.log('sort: {}, {}', ia, ib);
+            //     if (ia >= 0) {
+            //         return ib < 0 ? -1 : (ia - ib);
+            //     }
+            //     if (ib >= 0) return 1;
+            //     return 0.5 - Math.random();
+            // });
         }
 
 
 
-        questionIndex = ids.length == 0 ? 0 : quizData.findIndex(a => ids.indexOf(a.id + "") < 0);
-        if (questionIndex < 0) questionIndex = 0;
+        // questionIndex = ids.length == 0 ? 0 : quizData.findIndex(a => ids.indexOf(a.id + "") < 0);
+        // if (questionIndex < 0) questionIndex = 0;
 
     }
     function saveUserData(point) {
@@ -152,7 +153,8 @@ $(() => {
                 console.log("SaveTime:", save_time);
                 console.log("adjusted_sv_timer:", adjusted_sv_timer);
                 //setTimeout(() => showQuestion(questionIndex + 1), 1000);
-                showQuestion(questionIndex + 1);
+                randomQuest();
+                showQuestion(questionIndex);
             }
         })
     }
@@ -217,6 +219,11 @@ $(() => {
     function onTabChanged(event, ui) {
         if (ui.newPanel.is('#game-ranks')) showRankingTable();
     }
+
+    function randomQuest(){
+        questionIndex = Math.floor(Math.random() * (quizData.length - 1));
+    }
+
     function showQuestion(index) {
         if (index < 0 || index >= quizData.length) return;
         const item = quizData[index];
@@ -250,11 +257,11 @@ $(() => {
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
 
         const $header = $(`#game-header`);
-        userInfo = JSON.parse(appData.get('user'))
-        if (!userInfo) {
-            return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
-        }
-//        userInfo = {"first_name": "duc", "last_name": "nguyen","username": "ducna"};
+        // userInfo = JSON.parse(appData.get('user'))
+        // if (!userInfo) {
+        //     return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
+        // }
+       userInfo = {"first_name": "duc", "last_name": "nguyen","username": "ducna"};
 
         loadUserData();
 
@@ -267,9 +274,11 @@ $(() => {
         </div>`);
         if (canPlay()) {
             for(let i = 0, n = quizData.length; i < n; i++) {
+                // var idQuest = Math.floor(Math.random() * (quizData.length - 1));
                 item = quizData[i];
                 addItem(item, $container);
             }
+            
         }
         display_retry_time();
 
@@ -279,6 +288,13 @@ $(() => {
         // $nav.append($('<button class="ui-button" id="btnNext">Câu sau</button>').click(() => showQuestion(questionIndex+1)))
         $container.append($nav)
         $('button', $nav).button();
+        console.log("aaaa " + questionIndex)
+
+        if (questionIndex == -1){
+            randomQuest();
+        }
+
+        console.log(questionIndex)
         showQuestion(questionIndex);
     }
     main();

@@ -1,3 +1,5 @@
 .vercel
 .env*
 .idea/
+*.env.development.local
+.DS_Store

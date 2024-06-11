@@ -54,7 +54,7 @@ def user_data(user_id):
         row = cursor.fetchone()
         return {"data": None} if not row else {
             "data": {"answered": row[0], "time": row[1], "high_score": row[2], "last_answer_is_correct": row[3],
-                     "now": row[4]}}
+                     "last_question_index": row[4], "now": row[5]}}
     except Exception as e:
         print(e)
         return {"code": "400", "data": "BAD_REQUEST"}
