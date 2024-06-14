@@ -154,10 +154,6 @@
 "title": "Đánh giá hiệu suất công việc nhằm giúp nhân viên và quản lý xác định điều gì?",
 "content": "Đánh giá hiệu suất công việc nhằm giúp nhân viên và quản lý xác định điều gì?","answers": [
 {"id":1,"content":"Sự thay đổi, thêm bớt nhân sự","point":0}, {"id":2,"content":"Mục tiêu và kế hoạch cho giai đoạn tiếp theo","point":1}, {"id":3,"content":"Mức thưởng cuối năm","point":0}, {"id":4,"content":"Kỳ nghỉ mát hàng năm","point":0}] }, 
-{"id": 40, 
-"title": "Một năm có mấy kỳ đánh giá hiệu suất công việc?",
-"content": "Một năm có mấy kỳ đánh giá hiệu suất công việc?","answers": [
-{"id":1,"content":"1 kỳ","point":0}, {"id":2,"content":"2 kỳ","point":1}, {"id":3,"content":"3 kỳ","point":0}, {"id":4,"content":"4 kỳ","point":0}] },
 {
   "id": 41,
   "title": "Nhân sự",
@@ -209,33 +205,6 @@
       "id": 4,
       "point": 1,
       "content": "36"
-    }
-  ]
-},
-{
-  "id": 43,
-  "title": "Nhân sự",
-  "content": "Công ty có bao nhiêu nhân sự nữ",
-  "answers": [
-    {
-      "id": 1,
-      "point": 0,
-      "content": "Answer1"
-    },
-    {
-      "id": 2,
-      "point": 0,
-      "content": "Answer2"
-    },
-    {
-      "id": 3,
-      "point": 0,
-      "content": "Answer3"
-    },
-    {
-      "id": 4,
-      "point": 1,
-      "content": "Answer4"
     }
   ]
 },
@@ -377,7 +346,7 @@
 {
   "id": 49,
   "title": "Nhân sự",
-  "content": "BGĐ có tất cả mấy anh nhỉ?",
+  "content": "BGĐ có bao nhiêu người?",
   "answers": [
     {
       "id": 1,
@@ -455,60 +424,7 @@
     }
   ]
 },
-{
-  "id": 52,
-  "title": "Văn hóa",
-  "content": "Văn hóa của công ty là gì?",
-  "answers": [
-    {
-      "id": 1,
-      "point": 0,
-      "content": "Answer1"
-    },
-    {
-      "id": 2,
-      "point": 0,
-      "content": "Answer2"
-    },
-    {
-      "id": 3,
-      "point": 0,
-      "content": "Answer3"
-    },
-    {
-      "id": 4,
-      "point": 1,
-      "content": "Kỷ luật và học tập"
-    }
-  ]
-},
-{
-  "id": 53,
-  "title": "Nội quy",
-  "content": "1 năm công ty có mấy lần checkpoint đánh giá kết quả nhân viên?",
-  "answers": [
-    {
-      "id": 1,
-      "point": 0,
-      "content": "Không lần nào"
-    },
-    {
-      "id": 2,
-      "point": 0,
-      "content": "1 lần "
-    },
-    {
-      "id": 3,
-      "point": 0,
-      "content": "3 lần "
-    },
-    {
-      "id": 4,
-      "point": 1,
-      "content": "2 lần"
-    }
-  ]
-},
+
 {
   "id": 54,
   "title": "Nhân sự",
@@ -674,7 +590,7 @@
 {
   "id": 60,
   "title": "Lịch sử",
-  "content": "Hiện tại team dev  có bao nhiêu thành viên",
+  "content": "Hiện tại team dev có bao nhiêu thành viên",
   "answers": [
     {
       "id": 1,
