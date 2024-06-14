@@ -11,7 +11,8 @@ $(() => {
     var save_time = 0;
     var adjusted_sv_timer = 0;
     var userInfo = null;
-    var questionIndex = 0;
+    var questionIndex = -1;
+    var max_question = 15;
     function addPoint(point, asNew = false) {
         if (point <= 0) return;
         totalPoint += point;
@@ -76,7 +77,19 @@ $(() => {
                 $btn.click(() => {
                     setAnswer(itemData, a, $btn, true)
                     $('button', $item).off('click').button('option', '`disabled`', true);
-                    setTimeout(() => showQuestion(questionIndex + 1), 1000);
+                    if(questionIndex >= max_question - 1){
+                        console.log("End Game");
+                        navText = "Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức."
+                        $('#txtNav').text("Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức.");
+                    }
+                    else{
+                        setTimeout(() => {
+                            // randomQuest();
+                            showQuestion(questionIndex + 1), 1000}
+                        );
+                    }
+                    
+                    
                 })
             }
             $answersContainer.append($btn)
@@ -88,10 +101,12 @@ $(() => {
 
 
     function loadUserData() {
-        $.ajax('/api/get-quiz', {
+        $.ajax(`/api/get-quiz/${encodeURIComponent(userInfo.username)}`, {
             async: false,
             success: json => quizData = json
         });
+
+        console.log("quiz data length" + quizData.length)
         var saved = JSON.parse(localStorage.getItem("answeredData")) || {};
         $.ajax(`/api/user_data/${encodeURIComponent(userInfo.username)}`, {
             method: 'GET',
@@ -102,6 +117,7 @@ $(() => {
                     saved = resp.data.answered;
                     highscore = resp.data.high_score
                     save_time = resp.data.time;
+                    questionIndex = resp.data.last_question_index;
                     adjusted_sv_timer = resp.data.now - Date.now() / 1000
                 }
             }
@@ -112,29 +128,35 @@ $(() => {
             answerData = saved;
         }
         const ids = Object.keys(answerData);
-        quizData.sort((a, b) => {
-            const ia = ids.indexOf(a.id + ''), ib = ids.indexOf(b.id + '')
-            console.log('sort: {}, {}', ia, ib);
-            if (ia >= 0) {
-                return ib < 0 ? -1 : (ia - ib);
-            }
-            if (ib >= 0) return 1;
-            return 0.5 - Math.random();
-        });
-        questionIndex = ids.length == 0 ? 0 : quizData.findIndex(a => ids.indexOf(a.id + "") < 0);
-        if (questionIndex < 0) questionIndex = 0;
+        // quizData.sort((a, b) => {
+        //     const ia = ids.indexOf(a.id + ''), ib = ids.indexOf(b.id + '')
+        //     console.log('sort: {}, {}', ia, ib);
+        //     if (ia >= 0) {
+        //         return ib < 0 ? -1 : (ia - ib);
+        //     }
+        //     if (ib >= 0) return 1;
+        //     return 0.5 - Math.random();
+        // });
+        // questionIndex = ids.length == 0 ? 0 : quizData.findIndex(a => ids.indexOf(a.id + "") < 0);
+        // if (questionIndex < 0) questionIndex = 0;
 
     }
+
+    function randomQuest(){
+    }
+
+
     function saveUserData() {
         localStorage.setItem("answered_data", JSON.stringify(answerData));
         localStorage.setItem("ans_time", Date.now());
-        const data = {answered_data: answerData, name: [userInfo.first_name, userInfo.last_name].join(' ')}
+        const data = {answered_data: answerData, name: [userInfo.first_name, userInfo.last_name].join(' '), last_question_index: questionIndex}
         $.ajax(`/api/user_data/${encodeURIComponent(userInfo.username)}`, {
             method: 'POST',
             data: JSON.stringify(data),
             success: resp => {
                 highscore = resp.data.high_score || highscore;
                 save_time = resp.data.time;
+                last_question_index = questionIndex;
                 adjusted_sv_timer = resp.data.now - Date.now() / 1000
                 console.log("SaveTime:", save_time);
                 console.log("adjusted_sv_timer:", adjusted_sv_timer);
@@ -145,6 +167,7 @@ $(() => {
 
     function canPlay() {
         if (!answerData || !quizData) return true;
+        if (questionIndex >= max_question - 1) return false;
         return Object.keys(answerData).length < quizData.length;
     }
 
@@ -207,13 +230,14 @@ $(() => {
             return;
         }
 
-        $('#txtNav').text((questionIndex + 1)  + "/" + quizData.length)
+        questionIndex = index;
+
+        $('#txtNav').text((questionIndex + 1)  + "/" + max_question)
 
         $question = $(`#question-${item.id}`);
         if ($question.length == 0) {
             return;
         }
-        questionIndex = index;
         
         
         $question.show()
@@ -229,10 +253,10 @@ $(() => {
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
         userInfo = JSON.parse(appData.get('user'))
         const $header = $(`#game-header`);
-        if (!userInfo) {
-            return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
-        }
-        
+        // if (!userInfo) {
+        //     return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
+        // }
+        userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
         loadUserData();
 
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
@@ -250,6 +274,10 @@ $(() => {
         }
         display_retry_time();
         
+        console.log("question index" + questionIndex)
+        if (questionIndex == -1){
+            questionIndex = 0;
+        }
         $nav = $('<div class="nav-questions"></div>')
         // $nav.append($('<button class="ui-button" id="btnPrev">Câu trước</button>').click(() => showQuestion(questionIndex-1)))
         $nav.append($('<span class="ui-nav-text" id="txtNav"></span>'))
@@ -257,6 +285,14 @@ $(() => {
         $container.append($nav)
         $('button', $nav).button();
         showQuestion(questionIndex);
+        // if (questionIndex >= max_question - 1){
+        //     navText = "Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức."
+        //     $('#txtNav').text("Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức.");
+        // }
+        // else{
+            
+        // }
+
     }
     main();
 });
