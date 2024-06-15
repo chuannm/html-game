@@ -23,8 +23,8 @@ def readQuizJson(user_id):
     if user_id not in random_seed.keys():
         seed = random.randint(1, 100000) 
         random_seed.update({user_id: seed})
-        print(random_seed)
         utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user_seed.json"), random_seed)
+        save_start_time(user_id=user_id, name= "tmp")
     
     else:
         seed = random_seed[user_id]
@@ -75,12 +75,11 @@ def getRanks() :
         return {"data": records}
 
 
-@app.route("/api/start_time/<user_id>", methods=["POST"])
-def save_start_time(user_id):
+# @app.route("/api/start_time/<user_id>", methods=["POST"])
+def save_start_time(user_id, name="tmp"):
     print("Saving start_time:",  user_id)
     if not user_id: return { "code": "400", "data": "BAD_REQUEST"}
-    data = request.get_json(True)
-    name = data["name"]
+    
     sql = """INSERT INTO user_data (id, json_data, name) VALUES (%s, %s, %s) 
             ON CONFLICT (id) DO UPDATE 
             SET 

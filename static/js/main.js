@@ -3,7 +3,7 @@
 $(() => {
     const API_TOKEN = '6993591131:AAHsLKMYZTk-HycIoCcUrUpvetRj127U0s8';
     const $container = $('#game-container');
-    const COOL_DOWN_TIME = 120;
+    const COOL_DOWN_TIME = 1; // minutes
     var quizData = [];
     var answerData = {};
     var totalPoint = 0;
@@ -13,6 +13,7 @@ $(() => {
     var userInfo = null;
     var questionIndex = -1;
     var max_question = 15;
+    var remainingQuestionTime;
     function addPoint(point, asNew = false) {
         if (point <= 0) return;
         totalPoint += point;
@@ -177,7 +178,26 @@ $(() => {
     function get_remaining_time() {
         return COOL_DOWN_TIME * 60 + Math.floor((save_time - get_server_now())) 
     }
-    function display_retry_time() {
+    function display_countdown_time() {
+        
+        if (remainingQuestionTime <= 0) {
+            //show next question
+            showQuestion(questionIndex + 1);
+            
+        }
+        else {
+            remainingQuestionTime -= 1;
+            var minutes = Math.floor(remainingQuestionTime / 60);
+            var hours = Math.floor(minutes / 60);
+            minutes = minutes - hours * 60;
+            var seconds = remainingQuestionTime % 60;
+            var displayTime = [hours, minutes, seconds].map(n => String(n).padStart(2, 0)).join(":")
+            $('#count_down').text(`Lượt tiếp theo: ${displayTime}`)
+        }
+        setTimeout(display_countdown_time, 1000)
+    }
+
+    function display_retry_time(){
         var remaining = get_remaining_time()
         if (remaining < 0) $('#count_down').text("")
         else {
@@ -190,6 +210,7 @@ $(() => {
         }
         setTimeout(display_retry_time, 1000)
     }
+
     function createRankItem(rank, name, score, time) {
         let $row = $('<div class="rank_item"></div>');
         $row.append(`<span class="bxh_rank">${rank}</span>`);
@@ -238,7 +259,7 @@ $(() => {
         if ($question.length == 0) {
             return;
         }
-        
+        remainingQuestionTime = COOL_DOWN_TIME * 60;
         
         $question.show()
         $('.nav-questions #btnPrev').button('option', 'disabled', questionIndex < 1);
@@ -259,18 +280,10 @@ $(() => {
         userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
         loadUserData();
 
-        if (questionIndex == -1){
-            console.log("saving time");
-            $.ajax(`/api/start_time/${encodeURIComponent(userInfo.username)}`,{
-                method: "POST",
-                data: JSON.stringify({name: [userInfo.first_name, userInfo.last_name].join(' ')}),
-            });
-        }
-
 
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
         $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
-        $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Đếm ngược lần chơi tiếp theo</div>`);
+        $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Đếm ngược câu hỏi tiếp theo</div>`);
         $header.append(`<div class="header-score">
             <div id="high-score">Điểm cao: ${highscore}</div>\
             <div id="total-score" >Điểm: 0</div>
@@ -281,7 +294,8 @@ $(() => {
                 addItem(item, $container);
             }
         }
-        display_retry_time();
+        remainingQuestionTime = COOL_DOWN_TIME * 60 ;
+        display_countdown_time();
         
         console.log("question index" + questionIndex)
         if (questionIndex == -1){
