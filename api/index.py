@@ -45,6 +45,7 @@ def user_data(user_id):
         sql = """INSERT INTO user_data (id, name, json_data, high_score, last_question_index) VALUES (%s, %s, %s, %s, %s) 
             ON CONFLICT (id) DO UPDATE 
             SET 
+                name = EXCLUDED.name,
                 json_data = EXCLUDED.json_data, 
                 high_score = GREATEST(EXCLUDED.high_score, (SELECT high_score FROM user_data WHERE id = EXCLUDED.id)), 
                 update_time = NOW(),
@@ -76,17 +77,25 @@ def getRanks() :
 
 @app.route("/api/start_time/<user_id>", methods=["POST"])
 def save_start_time(user_id):
+    print("Saving start_time:",  user_id)
     if not user_id: return { "code": "400", "data": "BAD_REQUEST"}
-    sql = """INSERT INTO user_data (id) VALUES (%s) 
+    data = request.get_json(True)
+    name = data["name"]
+    sql = """INSERT INTO user_data (id, json_data, name) VALUES (%s, %s, %s) 
             ON CONFLICT (id) DO UPDATE 
             SET 
-                start_time = NOW()
+                start_time = NOW(),
+                name = EXCLUDED.name,
+                json_data = EXCLUDED.json_data
         """
     try:
-        cursor = executeSQL(sql, [user_id])
+        cursor = executeSQL(sql, [user_id, json.dumps({}), name])
+        return { "code": "200", "data": "SUCCESS"}
     except Exception as e: 
         print (e)
         return { "code": "500", "data": "DATA ERROR"}
+    finally:
+        closeDB(True)
 
 def get_total_score(answered_data):
     score = 0
