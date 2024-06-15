@@ -179,21 +179,18 @@ $(() => {
         return COOL_DOWN_TIME * 60 + Math.floor((save_time - get_server_now())) 
     }
     function display_countdown_time() {
-        
-        if (remainingQuestionTime <= 0) {
-            //show next question
-            showQuestion(questionIndex + 1);
-            
+        remainingQuestionTime = get_remaining_time();
+        if (remainingQuestionTime < 0) {
+            $('#count_down').text(`Lượt tiếp theo: hết giờ`)
+            reload_data();
+            return;
         }
-        else {
-            remainingQuestionTime -= 1;
-            var minutes = Math.floor(remainingQuestionTime / 60);
-            var hours = Math.floor(minutes / 60);
-            minutes = minutes - hours * 60;
-            var seconds = remainingQuestionTime % 60;
-            var displayTime = [hours, minutes, seconds].map(n => String(n).padStart(2, 0)).join(":")
-            $('#count_down').text(`Lượt tiếp theo: ${displayTime}`)
-        }
+        var minutes = Math.floor(remainingQuestionTime / 60);
+        var hours = Math.floor(minutes / 60);
+        minutes = minutes - hours * 60;
+        var seconds = remainingQuestionTime % 60;
+        var displayTime = [hours, minutes, seconds].map(n => String(n).padStart(2, 0)).join(":")
+        $('#count_down').text(`Lượt tiếp theo: ${displayTime}`)
         setTimeout(display_countdown_time, 1000)
     }
 
@@ -259,14 +256,15 @@ $(() => {
         if ($question.length == 0) {
             return;
         }
-        remainingQuestionTime = COOL_DOWN_TIME * 60;
         
         $question.show()
-        $('.nav-questions #btnPrev').button('option', 'disabled', questionIndex < 1);
-        $('.nav-questions #btnNext').button('option', 'disabled', questionIndex >= quizData.length - 1);
+        // $('.nav-questions #btnPrev').button('option', 'disabled', questionIndex < 1);
+        // $('.nav-questions #btnNext').button('option', 'disabled', questionIndex >= quizData.length - 1);
+
+        
         
     }
-    function main() {
+    function reload_data() {
         $('#game-canvas').tabs({ hide: { effect: "zoomOut", duration: 300 },show: { effect: "fadeIn", duration: 500 }, beforeActivate: onTabChanged });
 
         var url = new URL(location.href)
@@ -274,27 +272,32 @@ $(() => {
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
         userInfo = JSON.parse(appData.get('user'))
         const $header = $(`#game-header`);
-        // if (!userInfo) {
-        //     return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
-        // }
-        userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
+        if (!userInfo) {
+            return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
+        }
         loadUserData();
 
 
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
-        $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
-        $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Đếm ngược câu hỏi tiếp theo</div>`);
-        $header.append(`<div class="header-score">
-            <div id="high-score">Điểm cao: ${highscore}</div>\
-            <div id="total-score" >Điểm: 0</div>
-        </div>`);
+        if ($('#user-info', $header)) {
+            $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
+            $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Câu hỏi tiếp theo</div>`);
+            $header.append(`<div class="header-score">
+                <div id="high-score">Điểm cao: ${highscore}</div>\
+                <div id="total-score" >Điểm: 0</div>
+            </div>`);
+        } else {
+            $('#user-info', $header).text(`${fullName} (${userInfo.username})`);
+            $('#high-score', $header).text(highscore)
+            $('#total-score', $header).text(0)
+        }
+        
         if (canPlay()) {
             for(let i = 0, n = quizData.length; i < n; i++) {
                 item = quizData[i];
                 addItem(item, $container);
             }
         }
-        remainingQuestionTime = COOL_DOWN_TIME * 60 ;
         display_countdown_time();
         
         console.log("question index" + questionIndex)
@@ -302,20 +305,12 @@ $(() => {
             questionIndex = 0;
         }
         $nav = $('<div class="nav-questions"></div>')
-        // $nav.append($('<button class="ui-button" id="btnPrev">Câu trước</button>').click(() => showQuestion(questionIndex-1)))
-        $nav.append($('<span class="ui-nav-text" id="txtNav"></span>'))
-        // $nav.append($('<button class="ui-button" id="btnNext">Câu sau</button>').click(() => showQuestion(questionIndex+1)))
+
+        $nav.append($('<span class="ui-nav-text" id="txtNav"></span>'))    
         $container.append($nav)
         $('button', $nav).button();
         showQuestion(questionIndex);
-        // if (questionIndex >= max_question - 1){
-        //     navText = "Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức."
-        //     $('#txtNav').text("Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức.");
-        // }
-        // else{
-            
-        // }
 
     }
-    main();
+    reload_data();
 });
