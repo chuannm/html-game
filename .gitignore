@@ -3,4 +3,3 @@
 .idea/
 *.env.development.local
 .DS_Store
-.env*.local
