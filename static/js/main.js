@@ -253,10 +253,10 @@ $(() => {
         var appData = new URLSearchParams(hasParams.get('tgWebAppData'))
         userInfo = JSON.parse(appData.get('user'))
         const $header = $(`#game-header`);
-        // if (!userInfo) {
-        //     return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
-        // }
-        userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
+        if (!userInfo) {
+            return $header.html("<h2>Bạn chưa đăng nhập</h2>Vui lòng đăng nhập để chơi game!")
+        }
+        // userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
         loadUserData();
 
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
