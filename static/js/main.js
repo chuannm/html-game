@@ -12,7 +12,7 @@ $(() => {
     var adjusted_sv_timer = 0;
     var userInfo = null;
     var questionIndex = -1;
-    var max_question = 15;
+    var max_question = 40;
     var remainingQuestionTime;
     function addPoint(point, asNew = false) {
         if (point <= 0) return;
@@ -233,6 +233,8 @@ $(() => {
 
             }
         })
+
+        setTimeout(showRankingTable, 10000);
     }
     function onTabChanged(event, ui) {
         if (ui.newPanel.is('#game-ranks')) showRankingTable();

@@ -6,13 +6,6 @@
       {"id":2,"content":"Tháng 07 năm 2022","point":1}, 
       {"id":3,"content":"Tháng 03 năm 2022","point":0}, 
       {"id":4,"content":"Tháng 12 năm 2022","point":0}] },
-  {"id": 2, 
-  "title": "Archer Studio hoạt động trong lĩnh vực nào?",
-  "content": "Archer Studio hoạt động trong lĩnh vực nào?","answers": [
-  {"id":1,"content":"outsource game","point":0}, 
-  {"id":2,"content":"Sản xuất game mid-core","point":1}, 
-  {"id":3,"content":"Phát triển phần mềm","point":0}, 
-  {"id":4,"content":"Công nghệ game","point":0}] },
   {"id": 3, 
   "title": "Đội ngũ nhân sự của Archer Studio có bao nhiêu thành viên?",
   "content": "Đội ngũ nhân sự của Archer Studio có bao nhiêu thành viên?","answers": [
@@ -62,20 +55,6 @@
   {"id":2,"content":"Mang lại niềm vui và trải nghiệm giải trí tốt nhất","point":1}, 
   {"id":3,"content":"Phát triển cộng đồng game thủ","point":0}, 
   {"id":4,"content":"Tăng tính giải trí","point":0}] },
-  {"id": 12, 
-  "title": "Các sáng lập viên của Archer Studio có kinh nghiệm trong những lĩnh vực nào?",
-  "content": "Các sáng lập viên của Archer Studio có kinh nghiệm trong những lĩnh vực nào?","answers": [
-  {"id":1,"content":"Quản lý dự án","point":0}, 
-  {"id":2,"content":"Phát hành game hard-core và phát triển game casual, hyper-casual","point":1}, 
-  {"id":3,"content":"Thiết kế đồ họa","point":0}, 
-  {"id":4,"content":"Marketing và quảng cáo","point":0}] },
-  {"id": 13, 
-  "title": "Archer Studio tập trung vào loại game nào?",
-  "content": "Archer Studio tập trung vào loại game nào?","answers": [
-  {"id":1,"content":"Game casual","point":0}, 
-  {"id":2,"content":"Game mid-core","point":1}, 
-  {"id":3,"content":"Game puzzle","point":0}, 
-  {"id":4,"content":"Game thể thao","point":0}] },
   {"id": 14, 
   "title": "Đội ngũ của Archer Studio có đặc điểm gì nổi bật?",
   "content": "Đội ngũ của Archer Studio có đặc điểm gì nổi bật?","answers": [
@@ -97,13 +76,6 @@
   {"id":2,"content":"2 kỳ: cuối tháng 6 và cuối tháng 12","point":1}, 
   {"id":3,"content":"3 kỳ: cuối tháng 4, 8 và 12","point":0}, 
   {"id":4,"content":"4 kỳ: cuối mỗi quý","point":0}] },
-  {"id": 17, 
-  "title": "Các yếu tố ảnh hưởng tới việc điều chỉnh lương là gì?",
-  "content": "Các yếu tố ảnh hưởng tới việc điều chỉnh lương là gì?","answers": [
-  {"id":1,"content":"Kinh nghiệm làm việc","point":0}, 
-  {"id":2,"content":"Điểm trung bình của các kỳ đánh giá","point":1}, 
-  {"id":3,"content":"Mức độ hoàn thành công việc hàng tháng","point":0}, 
-  {"id":4,"content":"Số năm công tác","point":0}] },
   {"id": 18, 
   "title": "Nếu làm ngoài văn phòng, CBNV cần có gì để được tính công?",
   "content": "Nếu làm ngoài văn phòng, CBNV cần có gì để được tính công?","answers": [
@@ -139,13 +111,6 @@
   {"id":2,"content":"Để dành đi du lịch","point":0}, 
   {"id":3,"content":"Anh em tự tổ chức liên hoan với nhau","point":1}, 
   {"id":4,"content":"Đóng góp từ thiện","point":0}] },
-  {"id": 26, 
-  "title": "Nếu hết ngày phép và vi phạm việc không chấm công, hình thức xử lý là gì?",
-  "content": "Nếu hết ngày phép và vi phạm việc không chấm công, hình thức xử lý là gì?","answers": [
-  {"id":1,"content":"Trừ lương","point":1}, 
-  {"id":2,"content":"Cảnh cáo","point":0}, 
-  {"id":3,"content":"Kỉ luật","point":0}, 
-  {"id":4,"content":"Gửi email nhắc nhở","point":0}] },
   {"id": 27, 
   "title": "Điều kiện để CBNV được hưởng phúc lợi khám sức khỏe hàng năm là gì?",
   "content": "Điều kiện để CBNV được hưởng phúc lợi khám sức khỏe hàng năm là gì?","answers": [
@@ -230,17 +195,11 @@
   {"id":2,"content":"Kết quả đánh giá của nhân viên và tình hình kinh doanh của công ty","point":1}, 
   {"id":3,"content":"Số ngày nghỉ phép của nhân viên","point":0}, 
   {"id":4,"content":"Thời gian làm việc của nhân viên","point":0}] },
-  {"id": 39, 
-  "title": "Đánh giá hiệu suất công việc nhằm giúp nhân viên và quản lý xác định điều gì?",
-  "content": "Đánh giá hiệu suất công việc nhằm giúp nhân viên và quản lý xác định điều gì?","answers": [
-  {"id":1,"content":"Sự thay đổi, thêm bớt nhân sự","point":0}, 
-  {"id":2,"content":"Mục tiêu và kế hoạch cho giai đoạn tiếp theo","point":1}, 
-  {"id":3,"content":"Mức thưởng cuối năm","point":0}, 
-  {"id":4,"content":"Kỳ nghỉ mát hàng năm","point":0}] },
   {"id": 40, 
   "title": "Một năm có mấy kỳ đánh giá hiệu suất công việc?",
   "content": "Một năm có mấy kỳ đánh giá hiệu suất công việc?","answers": [
   {"id":1,"content":"1 kỳ","point":0}, 
   {"id":2,"content":"2 kỳ","point":1}, 
   {"id":3,"content":"3 kỳ","point":0}, 
-  {"id":4,"content":"4 kỳ","point":0}] }]
+  {"id":4,"content":"4 kỳ","point":0}] 
+}]

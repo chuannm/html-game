@@ -54,9 +54,9 @@ def user_data(user_id):
             if is_question_timeout(data["data"]): nextQuestion(user_id)
             else: return data
     except Exception as e:
-        traceback.print_exception (e)
+        traceback.print_exception (value=e, tb = None)
         now = getNow()
-        {"data": { "answered": [], "time": now, "high_score": 0, "now": now, "last_question_index": 0} }
+        return {"data": { "answered": [], "time": now, "high_score": 0, "now": now, "last_question_index": 0} }
     finally:
         closeDB(True)
 
