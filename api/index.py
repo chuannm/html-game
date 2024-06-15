@@ -62,9 +62,9 @@ def user_data(user_id):
 
 @app.route('/api/ranks')
 def getRanks() :
-        sql = "SELECT id, name, (start_time - update_time) * 1000 as play_time, high_score FROM user_data ORDER BY high_score DESC, play_time DESC LIMIT 100;"
+        sql = "SELECT id, name, extract(epoch from (update_time - start_time)) as play_time, high_score FROM user_data ORDER BY high_score DESC, play_time LIMIT 100;"
         cursor = executeSQL(sql, [])
-        records = [{"id": row[0], "name": row[1], "timed": -int(row[2]), "score": int(row[3])} for row in cursor.fetchall()]
+        records = [{"id": row[0], "name": row[1], "timed": int(row[2]), "score": int(row[3])} for row in cursor.fetchall()]
         return {"data": records}
 
 def save_start_time(user_id, name="tmp"):

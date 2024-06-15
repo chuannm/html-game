@@ -167,7 +167,7 @@ $(() => {
     }
 
     function canPlay() {
-        if (!answerData || !quizData) return true;
+        if (!answerData || answerData.length == 0 || !quizData) return true;
         if (questionIndex >= max_question - 1) return false;
         return Object.keys(answerData).length < quizData.length;
     }
@@ -243,8 +243,9 @@ $(() => {
         if (!item) return;
         $('.question-container', $container).hide();
         if (!canPlay()) {
-            navText = "Đã hoàn thành! Hãy chờ cooldown để chơi lại."
-            $('#txtNav').text("Đã hoàn thành! Hãy chờ cooldown để chơi lại.");
+            $('#txtNav').text("Đã hoàn thành! Hãy chờ kết quà từ ban tổ chức.");
+            $('#count_down').hide();
+            $('#total-score').hide();
             return;
         }
 
@@ -279,18 +280,10 @@ $(() => {
 
 
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
-        if ($('#user-info', $header)) {
-            $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
-            $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Câu hỏi tiếp theo</div>`);
-            $header.append(`<div class="header-score">
-                <div id="high-score">Điểm cao: ${highscore}</div>\
-                <div id="total-score" >Điểm: 0</div>
-            </div>`);
-        } else {
-            $('#user-info', $header).text(`${fullName} (${userInfo.username})`);
-            $('#high-score', $header).text(highscore)
-            $('#total-score', $header).text(0)
-        }
+        
+        $('#user-info', $header).text(`${fullName} (${userInfo.username})`);
+        $('#high-score', $header).text(highscore)
+        $('#total-score', $header).text(0)
         
         if (canPlay()) {
             for(let i = 0, n = quizData.length; i < n; i++) {
