@@ -168,6 +168,7 @@ $(() => {
 
     function canPlay() {
         if (!answerData || answerData.length == 0 || !quizData) return true;
+        max_question = Math.min(max_question, quizData.length);
         if (questionIndex >= max_question - 1) return false;
         return Object.keys(answerData).length < quizData.length;
     }
@@ -179,6 +180,11 @@ $(() => {
         return COOL_DOWN_TIME * 60 + Math.floor((save_time - get_server_now())) 
     }
     function display_countdown_time() {
+        if (!canPlay()) {
+            $('#txtNav').text("Đã hoàn thành! Hãy chờ kết quà từ ban tổ chức.");
+            $('#count_down').hide();
+            return;
+        }
         remainingQuestionTime = get_remaining_time();
         if (remainingQuestionTime < 0) {
             $('#count_down').text(`Lượt tiếp theo: hết giờ`)
@@ -284,28 +290,25 @@ $(() => {
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
         
         $('#user-info', $header).text(`${fullName} (${userInfo.username})`);
-        $('#high-score', $header).text(highscore)
-        $('#total-score', $header).text(0)
-        
+        $('#high-score', $header).text(`Điểm cao nhất: ${highscore}`)
         if (canPlay()) {
+            $('#total-score', $header).text(`Điểm cao nhất: ${highscore}`)
             for(let i = 0, n = quizData.length; i < n; i++) {
                 item = quizData[i];
                 addItem(item, $container);
             }
         }
-        display_countdown_time();
         
         console.log("question index" + questionIndex)
         if (questionIndex == -1){
             questionIndex = 0;
         }
         $nav = $('<div class="nav-questions"></div>')
-
         $nav.append($('<span class="ui-nav-text" id="txtNav"></span>'))    
         $container.append($nav)
         $('button', $nav).button();
         showQuestion(questionIndex);
-
+        display_countdown_time();
     }
     reload_data();
 });
