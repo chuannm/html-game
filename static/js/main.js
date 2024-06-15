@@ -259,6 +259,13 @@ $(() => {
         // userInfo = {"first_name": "sang", "last_name": "tran","username": "sangtran97z"};
         loadUserData();
 
+        if (questionIndex == -1){
+            $.ajax(`/api/start_time/${encodeURIComponent(userInfo.username)}`,{
+                console.log("Saved start time");
+            })
+        }
+
+
         const fullName = [userInfo.first_name, userInfo.last_name].join(' ') ;
         $header.append(`<div id="user-info" class="ui-widget ui-corner-all" >${fullName} (${userInfo.username})</div>`);
         $header.append(`<div id="count_down" class="header-score ui-widget ui-corner-all">Đếm ngược lần chơi tiếp theo</div>`);

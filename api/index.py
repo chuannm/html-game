@@ -73,9 +73,26 @@ def getRanks() :
         records = [{"id": row[0], "name": row[1], "timed": -int(row[2]), "score": int(row[3])} for row in cursor.fetchall()]
         return {"data": records}
 
+
+@app.route("/api/start_time/<user_id>", methods=["POST"])
+def save_start_time(user_id):
+    if not user_id: return { "code": "400", "data": "BAD_REQUEST"}
+    sql = """INSERT INTO user_data (id) VALUES (%s) 
+            ON CONFLICT (id) DO UPDATE 
+            SET 
+                start_time = NOW()
+        """
+    try:
+        cursor = executeSQL(sql, [user_id])
+    except Exception as e: 
+        print (e)
+        return { "code": "500", "data": "DATA ERROR"}
+
 def get_total_score(answered_data):
     score = 0
     for key in answered_data:
         a = answered_data[key]
         score += a['point']
     return score
+
+
