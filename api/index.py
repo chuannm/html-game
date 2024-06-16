@@ -92,10 +92,14 @@ def save_start_time(user_id, name="tmp"):
 
 def get_total_score(answered_data):
     score = 0
-    for key in answered_data:
-        print ("answered_data[",key, "]")
-        a = answered_data[key]
-        score += a['point']
+    try:
+        for key in answered_data:
+            print ("answered_data[",key, "]")
+            a = answered_data[key]
+            score += a['point']
+    except Exception as e:
+        traceback.print_exception(value=e, tb=None)
+        
     return score
 
 

@@ -79,7 +79,7 @@ $(() => {
                     questionIndex++;
                     setAnswer(itemData, a, $btn, true)
                     $('button', $item).off('click').button('option', '`disabled`', true);
-                    if(questionIndex >= max_question - 1){
+                    if(questionIndex >= max_question){
                         console.log("End Game");
                         navText = "Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức."
                         $('#txtNav').text("Bạn đã hoàn thành các câu hỏi, hãy chờ kết quả từ ban tổ chức.");
@@ -293,7 +293,7 @@ $(() => {
         $('#user-info', $header).text(`${fullName} (${userInfo.username})`);
         $('#high-score', $header).text(`Điểm cao nhất: ${highscore}`)
         if (canPlay()) {
-            $('#total-score', $header).text(`Điểm cao nhất: ${highscore}`)
+            $('#total-score', $header).text(`Điểm: ${highscore}`)
             for(let i = 0, n = quizData.length; i < n; i++) {
                 item = quizData[i];
                 addItem(item, $container);
