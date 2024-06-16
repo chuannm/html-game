@@ -13,5 +13,4 @@ ALTER TABLE "user_data" ADD IF NOT EXISTS last_question_index integer DEFAULT -1
 ALTER TABLE "user_data" ADD IF NOT EXISTS start_time TIMESTAMP DEFAULT NOW(); 
 ALTER TABLE "user_data" ADD IF NOT EXISTS random_seed integer DEFAULT -1; 
 
-
-SELECT id, name, (start_time - update_time) * 1000 as play_time, high_score FROM user_data ORDER BY high_score DESC, play_time DESC LIMIT 100;
+-- SELECT id, name, (start_time - update_time) * 1000 as play_time, high_score FROM user_data ORDER BY high_score DESC, play_time DESC LIMIT 100;

@@ -6,12 +6,10 @@ from .common.request_utils import getParam
 from .common.db import executeSQL, closeDB
 from .common import utils
 import traceback 
-SEED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json")
+
 
 quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json")) or []
-random_seed = utils.read_json(SEED_FILE) or {}
 idx_list = list(range(0, len(quiz_data)))
-
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.secret_key = "$3CR3TKE1"
@@ -21,21 +19,17 @@ def home():
     
 @app.route('/api/get-quiz/<user_id>')
 def readQuizJson(user_id):
-    if user_id not in random_seed.keys():
-        seed = random.randint(1, 100000) 
-        random_seed.update({user_id: seed})
-        utils.write_json(SEED_FILE, random_seed)
-        save_start_time(user_id=user_id)
-    
-    else:
-        seed = random_seed[user_id]
+    seed = get_random_seed(user_id)
+    if seed == -1:
+        seed = random.randint(1, 100000)
+        save_start_time(user_id, seed)
     
     random_idx = utils.shuffle_list_with_seed(idx_list.copy(), seed)
-    
     return [quiz_data[i] for i in random_idx]
 
 @app.route('/api/user_data/<user_id>', methods = ["GET", "POST"])
 def user_data(user_id):
+
     if not user_id: return { "code": "400", "data": "BAD_REQUEST"}
     if request.method == 'POST':
         data = request.get_json(True)
@@ -70,11 +64,11 @@ def getRanks() :
         records = [{"id": row[0], "name": row[1], "timed": int(row[2]), "score": int(row[3])} for row in cursor.fetchall()]
         return {"data": records}
 
-def save_start_time(user_id, name="tmp"):
+def save_start_time(user_id, seed, name="tmp"):
     print("Saving start_time:",  user_id)
     if not user_id: return { "code": "400", "data": "BAD_REQUEST"}
     
-    sql = """INSERT INTO user_data (id, json_data, name) VALUES (%s, %s, %s) 
+    sql = """INSERT INTO user_data (id, json_data, name, random_seed) VALUES (%s, %s, %s, %s) 
             ON CONFLICT (id) DO UPDATE 
             SET 
                 start_time = NOW(),
@@ -82,7 +76,7 @@ def save_start_time(user_id, name="tmp"):
                 json_data = EXCLUDED.json_data
         """
     try:
-        cursor = executeSQL(sql, [user_id, json.dumps({}), name])
+        cursor = executeSQL(sql, [user_id, json.dumps({}), name, seed])
         return { "code": "200", "data": "SUCCESS"}
     except Exception as e: 
         traceback.print_exception(value=e, tb=None, etype=Exception)
@@ -151,3 +145,9 @@ def getNow():
     except Exception as e:
         traceback.print_exception(value=e, tb=None, etype=Exception)
     return time()
+
+def get_random_seed(user_id):
+    cursor = executeSQL("SELECT random_seed FROM user_data WHERE id = %s", [user_id,])
+    row = cursor.fetchone()
+    return -1 if row is None else row[0]
+
