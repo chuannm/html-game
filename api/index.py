@@ -7,8 +7,8 @@ from .common.db import executeSQL, closeDB
 from .common import utils
 import traceback 
 
-quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json"))
-random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"))
+quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json")) or []
+random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json")) or {}
 idx_list = list(range(0, len(quiz_data)))
 
 
@@ -23,7 +23,7 @@ def readQuizJson(user_id):
     if user_id not in random_seed.keys():
         seed = random.randint(1, 100000) 
         random_seed.update({user_id: seed})
-        utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user_seed.json"), random_seed)
+        utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"), random_seed)
         save_start_time(user_id=user_id)
     
     else:
@@ -50,15 +50,16 @@ def user_data(user_id):
             cursor = executeSQL(sql, [user_id,])
             row = cursor.fetchone()
             data = {"data": None} if not row else {"data": { "answered": row[0], "time": row[1], "high_score": row[2], "now": row[3], "last_question_index": row[4]} }
+            if data['data'] is None: break
             print("selected data:", data)
             if is_question_timeout(data["data"]): nextQuestion(user_id)
             else: return data
     except Exception as e:
         traceback.print_exception (value=e, tb = None)
-        now = getNow()
-        return {"data": { "answered": [], "time": now, "high_score": 0, "now": now, "last_question_index": 0} }
     finally:
         closeDB(True)
+    now = getNow()
+    return {"data": { "answered": [], "time": now, "high_score": 0, "now": now, "last_question_index": 0} }
 
 @app.route('/api/ranks')
 def getRanks() :
@@ -119,7 +120,7 @@ def saveUserData(user_id, name, answered_data, high_score, last_question_index):
     try:
         executeSQL(sql, [user_id, name, json.dumps(answered_data), high_score, last_question_index])
     except Exception as e: 
-        traceback.print_exception (e)
+        traceback.print_exception (value=e, tb = None)
         return { "code": "500", "data": "DATA ERROR"} 
     finally:
         closeDB(True)
@@ -128,7 +129,7 @@ def nextQuestion(user_id):
     try:
         executeSQL("UPDATE user_data SET last_question_index = last_question_index + 1, update_time = NOW() WHERE id = %s", [user_id,])
     except Exception as e: 
-        traceback.print_exception (e)
+        traceback.print_exception (value=e, tb = None)
         return { "code": "500", "data": "DATA ERROR"} 
     finally:
         closeDB(True)
@@ -139,5 +140,5 @@ def getNow():
         cursor = executeSQL("SELECT extract(epoch FROM NOW())")
         return cursor.fetchone()[0]
     except Exception as e:
-        traceback.print_exception(e)
+        traceback.print_exception (value=e, tb = None)
     return time()
