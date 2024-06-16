@@ -7,8 +7,8 @@ from .common.db import executeSQL, closeDB
 from .common import utils
 import traceback 
 
-quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json"))
-random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"))
+quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json")) or []
+random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json")) or {}
 idx_list = list(range(0, len(quiz_data)))
 
 
@@ -23,7 +23,7 @@ def readQuizJson(user_id):
     if user_id not in random_seed.keys():
         seed = random.randint(1, 100000) 
         random_seed.update({user_id: seed})
-        utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user_seed.json"), random_seed)
+        utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"), random_seed)
         save_start_time(user_id=user_id)
     
     else:
