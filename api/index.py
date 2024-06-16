@@ -40,6 +40,7 @@ def user_data(user_id):
     if request.method == 'POST':
         data = request.get_json(True)
         answered_data = data["answered_data"]
+        print ("answered_data", answered_data)
         name = data["name"]
         last_question_index = data["last_question_index"]
         high_score = get_total_score(answered_data)
@@ -56,7 +57,7 @@ def user_data(user_id):
             if is_question_timeout(data["data"]): nextQuestion(user_id)
             else: return data
     except Exception as e:
-        traceback.print_exception (value=e, tb = None)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
     finally:
         closeDB(True)
     now = getNow()
@@ -84,7 +85,7 @@ def save_start_time(user_id, name="tmp"):
         cursor = executeSQL(sql, [user_id, json.dumps({}), name])
         return { "code": "200", "data": "SUCCESS"}
     except Exception as e: 
-        traceback.print_exception (e)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
         return { "code": "500", "data": "DATA ERROR"}
     finally:
         # commit db;
@@ -92,13 +93,14 @@ def save_start_time(user_id, name="tmp"):
 
 def get_total_score(answered_data):
     score = 0
+    print ("get_total_score", answered_data)
     try:
         for key in answered_data:
             print ("answered_data[",key, "]")
             a = answered_data[key]
             score += a['point']
     except Exception as e:
-        traceback.print_exception(value=e, tb=None)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
         
     return score
 
@@ -124,9 +126,10 @@ def saveUserData(user_id, name, answered_data, high_score, last_question_index):
                 last_question_index = EXCLUDED.last_question_index
         """
     try:
+        print("answered data:", answered_data)
         executeSQL(sql, [user_id, name, json.dumps(answered_data), high_score, last_question_index])
     except Exception as e: 
-        traceback.print_exception (value=e, tb = None)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
         return { "code": "500", "data": "DATA ERROR"} 
     finally:
         closeDB(True)
@@ -135,7 +138,7 @@ def nextQuestion(user_id):
     try:
         executeSQL("UPDATE user_data SET last_question_index = last_question_index + 1, update_time = NOW() WHERE id = %s", [user_id,])
     except Exception as e: 
-        traceback.print_exception (value=e, tb = None)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
         return { "code": "500", "data": "DATA ERROR"} 
     finally:
         closeDB(True)
@@ -146,5 +149,5 @@ def getNow():
         cursor = executeSQL("select extract(epoch from now())")
         return cursor.fetchone()[0]
     except Exception as e:
-        traceback.print_exception (value=e, tb = None)
+        traceback.print_exception(value=e, tb=None, etype=Exception)
     return time()
