@@ -169,7 +169,7 @@ $(() => {
     function canPlay() {
         if (!answerData || answerData.length == 0 || !quizData) return true;
         max_question = Math.min(max_question, quizData.length);
-        if (questionIndex >= max_question - 1) return false;
+        if (questionIndex >= max_question) return false;
         return Object.keys(answerData).length < quizData.length;
     }
 
