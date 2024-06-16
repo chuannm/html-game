@@ -8,7 +8,7 @@ from .common import utils
 import traceback 
 
 quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json"))
-random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user_seed.json"))
+random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"))
 idx_list = list(range(0, len(quiz_data)))
 
 
