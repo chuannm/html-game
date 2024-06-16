@@ -76,6 +76,7 @@ $(() => {
                 }
             } else {
                 $btn.click(() => {
+                    questionIndex++;
                     setAnswer(itemData, a, $btn, true)
                     $('button', $item).off('click').button('option', '`disabled`', true);
                     if(questionIndex >= max_question - 1){
@@ -86,7 +87,7 @@ $(() => {
                     else{
                         setTimeout(() => {
                             // randomQuest();
-                            showQuestion(questionIndex + 1), 1000}
+                            showQuestion(questionIndex), 1000}
                         );
                     }
                     

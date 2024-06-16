@@ -14,6 +14,7 @@ html, body {
   @keyframes blinker {
     50% {
         opacity: 0;
+        color: blue;
     }
   }
   
@@ -136,7 +137,7 @@ game-canvas >div {
     flex: 1;
     min-width: calc(50% - 10px);
     font-size: 12px;
-    color: white;
+    color: black;
     font-weight: bolder;
     background-color: orange;
     box-shadow: -5px 5px saddlebrown

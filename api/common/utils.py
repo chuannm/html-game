@@ -14,6 +14,7 @@ def read_json(json_path):
 def write_json(json_path, d):
     print(d)
     with open(json_path, "w") as f:
-        f.write(str(d))
+        f.write(json.dumps(d))
 
         return True
+    

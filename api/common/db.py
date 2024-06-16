@@ -13,7 +13,7 @@ def getConnection():
         )
     return __connection__
 def getDBCursor(): return getConnection().cursor()
-def executeSQL(sql: str, params: any):
+def executeSQL(sql: str, params: any = None):
     cursor = getDBCursor()
     print ("sql: {}, {} ".format(sql, params))
     cursor.execute(sql, params)

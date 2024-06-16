@@ -6,9 +6,10 @@ from .common.request_utils import getParam
 from .common.db import executeSQL, closeDB
 from .common import utils
 import traceback 
+SEED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json")
 
 quiz_data = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "quiz-data.json")) or []
-random_seed = utils.read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json")) or {}
+random_seed = utils.read_json(SEED_FILE) or {}
 idx_list = list(range(0, len(quiz_data)))
 
 
@@ -23,7 +24,7 @@ def readQuizJson(user_id):
     if user_id not in random_seed.keys():
         seed = random.randint(1, 100000) 
         random_seed.update({user_id: seed})
-        utils.write_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "user-seed.json"), random_seed)
+        utils.write_json(SEED_FILE, random_seed)
         save_start_time(user_id=user_id)
     
     else:
@@ -92,6 +93,7 @@ def save_start_time(user_id, name="tmp"):
 def get_total_score(answered_data):
     score = 0
     for key in answered_data:
+        print ("answered_data[",key, "]")
         a = answered_data[key]
         score += a['point']
     return score
@@ -137,7 +139,7 @@ def nextQuestion(user_id):
 
 def getNow():
     try:
-        cursor = executeSQL("SELECT extract(epoch FROM NOW())")
+        cursor = executeSQL("select extract(epoch from now())")
         return cursor.fetchone()[0]
     except Exception as e:
         traceback.print_exception (value=e, tb = None)
